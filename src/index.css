@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --highlight: #fbbf24;
+  --success: #34d399;
+  --danger: #f87171;
+
+  /* Reader tokens */
+  --reader-bg: #0c1118;
+  --reader-header-bg: rgba(15, 20, 35, 0.85);
+  --reader-header-border: rgba(255, 255, 255, 0.06);
+  --reader-header-text: #e2e8f0;
+  --reader-header-sub: #94a3b8;
+  --reader-panel-bg: #111827;
+  --reader-panel-border: rgba(255, 255, 255, 0.07);
+  --reader-progress-track: #1e293b;
+  --reader-btn-active-ann: rgba(251,191,36,0.12);
+  --reader-btn-active-ann-text: #fbbf24;
+  --reader-btn-active-ann-border: rgba(251,191,36,0.3);
+  --reader-btn-active-ai: rgba(99,102,241,0.12);
+  --reader-btn-active-ai-text: #818cf8;
+  --reader-btn-active-ai-border: rgba(99,102,241,0.3);
+  --reader-btn-inactive: rgba(51,65,85,0.6);
+  --reader-btn-inactive-text: #94a3b8;
+
+  /* Library header / surface tokens */
+  --lib-header-bg: rgba(12, 18, 32, 0.85);
+  --lib-header-border: rgba(255, 255, 255, 0.05);
+  --lib-title-color: #ffffff;
+  --lib-subtitle-color: #64748b;
+  --lib-btn-color: #94a3b8;
+  --lib-btn-hover-color: #ffffff;
+  --lib-btn-border: rgba(255, 255, 255, 0.08);
+  --lib-btn-hover-border: rgba(255, 255, 255, 0.15);
+  --lib-btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --lib-shelf-color: #94a3b8;
+  --lib-count-color: #475569;
+  --lib-empty-border: rgba(255, 255, 255, 0.10);
+  --lib-empty-hover-border: rgba(99, 102, 241, 0.40);
+  --lib-empty-title: #cbd5e1;
+  --lib-empty-sub: #475569;
+}
+
+/* ── Light "Paper" theme ─────────────────────────────────────── */
+[data-theme="light"] {
+  /* Reader tokens — light */
+  --reader-bg: #ede8dc;
+  --reader-header-bg: rgba(237, 232, 220, 0.92);
+  --reader-header-border: rgba(0, 0, 0, 0.07);
+  --reader-header-text: #2a1f12;
+  --reader-header-sub: #7a6550;
+  --reader-panel-bg: rgba(230, 222, 208, 0.85);
+  --reader-panel-border: rgba(0, 0, 0, 0.07);
+  --reader-progress-track: rgba(0,0,0,0.08);
+  --reader-btn-active-ann: rgba(180,130,30,0.12);
+  --reader-btn-active-ann-text: #92660a;
+  --reader-btn-active-ann-border: rgba(180,130,30,0.3);
+  --reader-btn-active-ai: rgba(99,102,241,0.10);
+  --reader-btn-active-ai-text: #4f46e5;
+  --reader-btn-active-ai-border: rgba(99,102,241,0.25);
+  --reader-btn-inactive: rgba(0,0,0,0.05);
+  --reader-btn-inactive-text: #7a6550;
+
+  --lib-header-bg: rgba(237, 232, 220, 0.90);
+  --lib-header-border: rgba(0, 0, 0, 0.07);
+  --lib-title-color: #2d1f10;
+  --lib-subtitle-color: #9b8268;
+  --lib-btn-color: #7a6550;
+  --lib-btn-hover-color: #2d1f10;
+  --lib-btn-border: rgba(0, 0, 0, 0.10);
+  --lib-btn-hover-border: rgba(0, 0, 0, 0.18);
+  --lib-btn-hover-bg: rgba(0, 0, 0, 0.04);
+  --lib-shelf-color: #7a6550;
+  --lib-count-color: #b09878;
+  --lib-empty-border: rgba(0, 0, 0, 0.10);
+  --lib-empty-hover-border: rgba(99, 102, 241, 0.40);
+  --lib-empty-title: #3d2a18;
+  --lib-empty-sub: #9b8268;
+  --lib-upload-bg: rgba(120, 80, 30, 0.03);
+}
+
+[data-theme="light"] body {
+  background-color: #ede8dc;
+  background-image:
+    /* Fine paper grain — high frequency noise */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.72 0 0 0 0 0.62 0 0 0 0 0.48 0 0 0 0.13 0'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23a)'/%3E%3C/svg%3E"),
+    /* Long paper fibers — low frequency streaks */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.35' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.60 0 0 0 0 0.50 0 0 0 0 0.35 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23b)'/%3E%3C/svg%3E"),
+    /* Subtle warm vignette */
+    radial-gradient(ellipse 110% 70% at 50% 50%, rgba(255,248,235,0.5) 0%, rgba(210,190,155,0.25) 100%);
+  color: #2a1f12;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px; /* +1px base → all rem-based text scales up proportionally */
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f5f3ef;
+  color: #1a1a1a;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+.text-highlight {
+  background: rgba(251, 191, 36, 0.3);
+  border-bottom: 2px solid var(--highlight);
+  cursor: pointer;
+}
+
+.text-highlight-ai {
+  background: rgba(99, 102, 241, 0.2);
+  border-bottom: 2px solid var(--accent);
+  cursor: pointer;
+}
+
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto !important;
+}
+
+.markdown-content {
+  line-height: 1.8;
+  font-size: 18px;
+}
+.markdown-content h1, .markdown-content h2, .markdown-content h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.markdown-content p { margin-bottom: 1em; }
+.markdown-content code {
+  background: var(--bg-card);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.markdown-content pre {
+  background: var(--bg-card);
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.markdown-content ul, .markdown-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+.markdown-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1em;
+  color: var(--text-secondary);
+  margin-bottom: 1em;
+}
+
+/* Slide-in animations */
+@keyframes slide-in-from-bottom {
+  from { transform: translateX(-50%) translateY(12px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);  opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom-modal {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.animate-in.slide-in-from-bottom-2 {
+  animation: slide-in-from-bottom 0.2s ease-out both;
+}
+
+.animate-in.slide-in-from-bottom-4 {
+  animation: slide-in-from-bottom-modal 0.2s ease-out both;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* PDF text layer — keep transparent to avoid showing garbled font-encoded text.
+   Highlights (spans with data-ann-id) still show their background color. */
+.textLayer {
+  color: transparent !important;
+}
+.textLayer span,
+.textLayer br {
+  color: transparent !important;
+}
+.textLayer [data-ann-id] {
+  color: transparent !important;
+}

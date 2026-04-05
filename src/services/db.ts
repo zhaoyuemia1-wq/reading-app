@@ -1,8 +1,8 @@
 import { openDB, type IDBPDatabase } from 'idb';
 import type { Book, Annotation, ChatMessage, BookSummary, Note, JournalEntry, VideoEntry } from '../types';
 
-const DB_NAME = 'reading-app';
-const DB_VERSION = 4;
+const DB_NAME = 'readmate-v4';
+const DB_VERSION = 1;
 
 let dbInstance: IDBPDatabase | null = null;
 

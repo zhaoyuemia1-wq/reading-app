@@ -72,6 +72,25 @@ export interface JournalEntry {
   updatedAt: number;
 }
 
+export interface VideoEntry {
+  id: string;              // internal ID
+  videoId: string;         // YouTube video ID
+  channelId?: string;
+  channelName?: string;
+  title: string;
+  thumbnail?: string;
+  publishedAt?: string;    // ISO date string
+  transcript?: string;     // full transcript text
+  summary?: string;        // AI-generated summary paragraph
+  keyPoints?: string[];    // bullet points
+  timestamps?: { time: string; text: string }[]; // key moments
+  tags?: string[];
+  addedAt: number;
+  analyzedAt?: number;
+  status: 'pending' | 'fetching' | 'analyzing' | 'done' | 'error';
+  error?: string;
+}
+
 export interface ChapterRecommendation {
   chapter: string;
   reason: string;

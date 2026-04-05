@@ -1,8 +1,8 @@
 import { openDB, type IDBPDatabase } from 'idb';
-import type { Book, Annotation, ChatMessage, BookSummary, Note, JournalEntry } from '../types';
+import type { Book, Annotation, ChatMessage, BookSummary, Note, JournalEntry, VideoEntry } from '../types';
 
 const DB_NAME = 'reading-app';
-const DB_VERSION = 3;
+const DB_VERSION = 4;
 
 let dbInstance: IDBPDatabase | null = null;
 
@@ -34,6 +34,12 @@ async function getDB() {
         const store = db.createObjectStore('journal', { keyPath: 'id' });
         store.createIndex('bookId', 'bookId');
         store.createIndex('createdAt', 'createdAt');
+      }
+      if (!db.objectStoreNames.contains('videos')) {
+        const store = db.createObjectStore('videos', { keyPath: 'id' });
+        store.createIndex('channelId', 'channelId');
+        store.createIndex('addedAt', 'addedAt');
+        store.createIndex('videoId', 'videoId', { unique: true });
       }
     },
   });
@@ -161,4 +167,35 @@ export async function getJournalEntries(bookId?: string): Promise<JournalEntry[]
 export async function deleteJournalEntry(id: string) {
   const db = await getDB();
   await db.delete('journal', id);
+}
+
+// Videos
+export async function saveVideo(video: VideoEntry) {
+  const db = await getDB();
+  await db.put('videos', video);
+}
+
+export async function getVideos(): Promise<VideoEntry[]> {
+  const db = await getDB();
+  return db.getAll('videos');
+}
+
+export async function getVideo(id: string): Promise<VideoEntry | undefined> {
+  const db = await getDB();
+  return db.get('videos', id);
+}
+
+export async function getVideoByYouTubeId(videoId: string): Promise<VideoEntry | undefined> {
+  const db = await getDB();
+  return db.getFromIndex('videos', 'videoId', videoId);
+}
+
+export async function deleteVideo(id: string) {
+  const db = await getDB();
+  await db.delete('videos', id);
+}
+
+export async function getVideosByChannel(channelId: string): Promise<VideoEntry[]> {
+  const db = await getDB();
+  return db.getAllFromIndex('videos', 'channelId', channelId);
 }

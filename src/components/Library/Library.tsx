@@ -9,6 +9,7 @@ import Settings from './Settings';
 import NotesDashboard from '../Notes/NotesDashboard';
 import KnowledgeBase from './KnowledgeBase';
 import Journal from '../Journal/Journal';
+import YouTubeView from '../YouTube/YouTubeView';
 import * as db from '../../services/db';
 import { detectFormat, generateId, readFileAsArrayBuffer, extractTitleFromFilename, generatePdfCover } from '../../services/fileParser';
 import { analyzeBook } from '../../services/bookAnalysis';
@@ -24,6 +25,7 @@ const CATEGORIES = ['心理', '金融', '历史', '其他'];
 const ALL_KEY = '全部';
 const KB_KEY = '__knowledge__';
 const JOURNAL_KEY = '__journal__';
+const YOUTUBE_KEY = '__youtube__';
 
 export default function Library({ onOpenBook }: Props) {
   const { state, dispatch } = useBooks();
@@ -235,6 +237,15 @@ export default function Library({ onOpenBook }: Props) {
             showCount={false}
           />
 
+          {/* YouTube */}
+          <SideNavItem
+            label="视频总结"
+            count={0}
+            active={selectedCategory === YOUTUBE_KEY}
+            onClick={() => setSelectedCategory(YOUTUBE_KEY)}
+            showCount={false}
+          />
+
           {/* Divider */}
           <div style={{ margin: '10px 8px 6px', fontSize: 10, fontWeight: 600, color: '#334155', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             分类
@@ -299,7 +310,7 @@ export default function Library({ onOpenBook }: Props) {
           /* ── Book shelf ── */
           <div>
             {/* Always-visible hero + upload zone */}
-            {selectedCategory !== JOURNAL_KEY && selectedCategory !== KB_KEY && (
+            {selectedCategory !== JOURNAL_KEY && selectedCategory !== KB_KEY && selectedCategory !== YOUTUBE_KEY && (
               <div style={{ marginBottom: 48 }}>
                 <h1 style={{
                   fontSize: 'clamp(2.2rem,5vw,3.4rem)', fontWeight: 700, color: '#1a1a1a',
@@ -322,7 +333,9 @@ export default function Library({ onOpenBook }: Props) {
             )}
 
             {/* Journal view */}
-            {selectedCategory === JOURNAL_KEY ? (
+            {selectedCategory === YOUTUBE_KEY ? (
+              <YouTubeView />
+            ) : selectedCategory === JOURNAL_KEY ? (
               <Journal />
             ) : selectedCategory === KB_KEY ? (
               <>
